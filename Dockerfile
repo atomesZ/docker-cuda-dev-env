@@ -1,5 +1,7 @@
 FROM nvidia/cuda:11.2.2-devel-ubuntu20.04
 
+ARG DEBIAN_FRONTEND=noninteractive
+
 WORKDIR /app
 
 RUN apt update -y && apt install -y cmake g++ wget unzip git
@@ -14,6 +16,7 @@ RUN cd /root && \
     cd build/ && \
     cmake .. && \
     make -j$(nproc) && \
+    make install && \
     rm -rf /root/opencv/
 
 
